@@ -18,7 +18,12 @@ class Menu extends Phaser.Scene{
         })
         //loading in audio 
         this.load.audio('sfx-select', './assets/sfx-select.wav')
-        this.load.audio('sfx-explosion', './assets/sfx-explosion.wav')
+        //explosion audio 
+        this.load.audio('wipe-explosion', './assets/wipe_explosion.wav')
+        this.load.audio('bomba', './assets/bomba.wav')
+        this.load.audio('decay-explosion', './assets/decay_explosion.wav')
+        this.load.audio('high-explosion',  './assets/high_explosion.wav') 
+        //shot audio 
         this.load.audio('sfx-shot', './assets/sfx-shot.wav')
     }
     //makes an object

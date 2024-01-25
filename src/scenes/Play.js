@@ -103,6 +103,21 @@ class Play extends Phaser.Scene{
         //score add and update the text
         this.p1Score += ship.points
         this.scoreLeft.text = this.p1Score
-        this.sound.play('sfx-explosion')
+        //have a random number generator here with console.log that goes from 0 to 3. 
+        let rand_num = Math.floor(Math.random() * 4)
+        //remove this later  
+        console.log("the rand num is " + rand_num);
+        if(rand_num == 0){
+            this.sound.play('wipe-explosion')
+        }
+        else if(rand_num == 1){
+            this.sound.play('decay-explosion')
+        }
+        else if(rand_num == 2){
+            this.sound.play('high-explosion')
+        }
+        else if(rand_num == 3){
+            this.sound.play('bomba')
+        }
     }
 }
