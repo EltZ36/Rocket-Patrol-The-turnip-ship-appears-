@@ -3,7 +3,7 @@ class TurnipShip extends Phaser.GameObjects.Sprite{
         super(scene, x, y, texture, frame)
         scene.add.existing(this)
         this.points = pointValue
-        this.moveSpeed = game.settings.spaceshipSpeed * 1.2
+        this.moveSpeed = game.settings.spaceshipSpeed * 1.8
         this.ship_random = Math.floor(Math.random() * 2)
     }
 
