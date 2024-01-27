@@ -41,20 +41,42 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig)
+        //time should either decrease or just increase to that limit
+        //code for the timer is gotten from the example: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
+        //this is for lines 49-50 and 105
+        this.timer = this.time.addEvent({delay: game.settings.gameTimer, loop: false})
+        this.text = this.add.text(borderUISize + 450, borderUISize + borderPadding * 2, '', scoreConfig);
+        //the fire ui and it should disappear with the key press f 
+        let fireConfig = {
+            fontFamily: 'Courier', 
+            fontSize:'28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'center',
+            padding:{
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.fireCenter = this.add.text(borderPadding + 350, borderUISize + borderPadding * 2, 'fire',fireConfig)
         //game over flag
         this.gameOver = false 
         //60 seconds play clock 
         scoreConfig.fixedWidth = 0
-        this.clock = this.time.delayedCall(60000, () => {
-            this.add.text(game.config.widht/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart', scoreConfig).setOrigin(0.5)
+        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5)
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5)
             this.gameOver = true 
         }, null, this)
     }
 
     update(){
         //check key input for restarting 
-        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)){
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
+            this.scene.restart() 
+        }
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){
             this.scene.start('menuScene')
         }
         this.starfield.tilePositionX -= 4
@@ -107,6 +129,7 @@ class Play extends Phaser.Scene{
         let rand_num = Math.floor(Math.random() * 4)
         //remove this later  
         console.log("the rand num is " + rand_num);
+        //random explosion stuff
         if(rand_num == 0){
             this.sound.play('wipe-explosion')
         }
@@ -118,6 +141,15 @@ class Play extends Phaser.Scene{
         }
         else if(rand_num == 3){
             this.sound.play('bomba')
+        }
+    }
+
+    fireUpdate(rocket){
+        if(rocket.isFiring){
+            this.fireCenter.setVisible(false);
+        }
+        else{
+            this.fireCenter.setVisible(true);
         }
     }
 }
