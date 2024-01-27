@@ -8,7 +8,7 @@ class Menu extends Phaser.Scene{
         //load in the rocket, background, and spaceships 
         this.load.image('rocket', './assets/rocket.png')
         this.load.image('spaceship', './assets/spaceship.png')
-        this.load.image('starfield', './assets/starfield.png')
+        this.load.image('starfield', './assets/cluttered_starfield.png')
         //the {} is a frame config object which has the frame height and width
         this.load.spritesheet('explosion', './assets/explosion.png', {
             frameWidth: 64, 
@@ -54,13 +54,12 @@ class Menu extends Phaser.Scene{
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
     }
-
     update(){
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             //easy mode
             game.settings = {
                 spaceshipSpeed: 3,
-                gameTimer: 60000
+                gameTimer: 10000
             }
             this.sound.play('sfx-select')
             this.scene.start('playScene')

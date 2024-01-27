@@ -42,9 +42,10 @@ class Play extends Phaser.Scene{
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig)
         //time should either decrease or just increase to that limit
-        //code for the timer is gotten from the example: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
-        //this is for lines 49-50 and 105
-        this.timer = this.time.addEvent({delay: game.settings.gameTimer, loop: false})
+        //code for the timer is gotten from the example: https://labs.phaser.io/edit.html?src=src\time\timer%20event.js
+        //I used the code above for lines 50, 51, and 114
+        this.speed_up = false
+        this.timer = this.time.addEvent({delay: 30000, callback: () => {this.speed_up = true}, loop: false})
         this.text = this.add.text(borderUISize + 450, borderUISize + borderPadding * 2, '', scoreConfig);
         //the fire ui and it should disappear with the key press f 
         let fireConfig = {
@@ -60,6 +61,10 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
         }
         this.fireCenter = this.add.text(borderPadding + 350, borderUISize + borderPadding * 2, 'fire',fireConfig)
+        /*this.add.timeline([{
+            at: 2000,
+            run(){console.log('30 seconds left')}
+        }])*/ 
         //game over flag
         this.gameOver = false 
         //60 seconds play clock 
@@ -97,7 +102,18 @@ class Play extends Phaser.Scene{
             this.ship01.update()
             this.ship02.update()
             this.ship03.update()
+            this.fireUpdate(this.p1Rocket)
+            //speed up the ship and then stop the increment otherwise it just disappears 
+            if(this.speed_up == true){
+                this.speedupdate(this.ship01)
+                this.speedupdate(this.ship02)
+                this.speedupdate(this.ship03)
+                this.speed_up = false;
+            }
         }
+        //I also used the documentation here for the remaining timer left for the timers: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
+        this.timerProgress = this.clock.getRemainingSeconds()
+        this.text.setText(`${Math.round(this.timerProgress)}`);
     }
 
     //collison checking
@@ -128,7 +144,7 @@ class Play extends Phaser.Scene{
         //have a random number generator here with console.log that goes from 0 to 3. 
         let rand_num = Math.floor(Math.random() * 4)
         //remove this later  
-        console.log("the rand num is " + rand_num);
+        //console.log("the rand num is " + rand_num);
         //random explosion stuff
         if(rand_num == 0){
             this.sound.play('wipe-explosion')
@@ -151,5 +167,9 @@ class Play extends Phaser.Scene{
         else{
             this.fireCenter.setVisible(true);
         }
+    }
+
+    speedupdate(ship){
+        ship.moveSpeed = ship.moveSpeed * 2
     }
 }
