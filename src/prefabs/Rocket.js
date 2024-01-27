@@ -8,6 +8,8 @@ class Rocket extends Phaser.GameObjects.Sprite{
     }
 
     update(){
+        //mouse movement is gotten from https://labs.phaser.io/edit.html?src=src/input/mouse/right%20mouse%20button.js&v=3.70.0
+        
         //left/right movement
         if(!this.isFiring){
             if(keyLEFT.isDown && this.x >= borderUISize + this.width){

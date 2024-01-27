@@ -25,6 +25,8 @@ class Play extends Phaser.Scene{
         this.ship01 = new SpaceShip(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0,0)
         this.ship02 = new SpaceShip(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0,0)
         this.ship03 = new SpaceShip(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0,0)
+        //the fastest ship 
+        this.turnip_ship = new TurnipShip(this, game.config.width, borderUISize * 8 + borderPadding * 5, 'turnipship',0,50).setOrigin(0,0)
         //score
         this.p1Score = 0
         //display the score 
@@ -97,17 +99,23 @@ class Play extends Phaser.Scene{
             this.p1Rocket.reset()
             this.shipExplode(this.ship01)
         }
+        if(this.checkCollison(this.p1Rocket, this.turnip_ship)){
+            this.p1Rocket.reset()
+            this.shipExplode(this.turnip_ship)
+        }
         if(!this.gameOver){
             this.p1Rocket.update()
             this.ship01.update()
             this.ship02.update()
             this.ship03.update()
+            this.turnip_ship.update()
             this.fireUpdate(this.p1Rocket)
             //speed up the ship and then stop the increment otherwise it just disappears 
             if(this.speed_up == true){
                 this.speedupdate(this.ship01)
                 this.speedupdate(this.ship02)
                 this.speedupdate(this.ship03)
+                this.speedupdate(this.turnip_ship)
                 this.speed_up = false;
             }
         }
@@ -169,7 +177,7 @@ class Play extends Phaser.Scene{
         }
     }
 
-    speedupdate(ship){
+    speedUpdate(ship){
         ship.moveSpeed = ship.moveSpeed * 2
     }
 }
