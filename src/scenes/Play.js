@@ -73,7 +73,7 @@ class Play extends Phaser.Scene{
             },
             fixedWidth: 100
         }
-        this.fireCenter = this.add.text(borderPadding + 350, borderUISize + borderPadding * 2, 'fire',fireConfig)
+        this.fireCenter = this.add.text(250, borderUISize + borderPadding * 2, 'fire',fireConfig)
         //game over flag
         this.gameOver = false 
         //60 seconds play clock 
@@ -174,10 +174,10 @@ class Play extends Phaser.Scene{
 
     fireUpdate(rocket){
         if(rocket.isFiring){
-            this.fireCenter.setVisible(false);
+            this.fireCenter.setVisible(true);
         }
         else{
-            this.fireCenter.setVisible(true);
+            this.fireCenter.setVisible(false);
         }
     }
 
