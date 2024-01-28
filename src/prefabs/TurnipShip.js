@@ -32,4 +32,8 @@ class TurnipShip extends Phaser.GameObjects.Sprite{
             this.x = 0
         }
     }
+
+    speedUp(){
+        this.moveSpeed = this.moveSpeed * 2
+    }
 }

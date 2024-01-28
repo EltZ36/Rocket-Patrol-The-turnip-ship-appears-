@@ -37,4 +37,8 @@ class SpaceShip extends Phaser.GameObjects.Sprite{
     getRandom(){
         return this.ship_random 
     }
+
+    speedUp(){
+        this.moveSpeed = this.moveSpeed * 2
+    }
 }

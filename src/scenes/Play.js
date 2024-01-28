@@ -56,7 +56,7 @@ class Play extends Phaser.Scene{
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig)
         //time should either decrease or just increase to that limit
         //code for the timer is gotten from the example: https://labs.phaser.io/edit.html?src=src\time\timer%20event.js
-        //I used the code above for lines 50, 51, and 114
+        //I used the code above for lines 60, 61, and 131
         this.speed_up = false
         this.timer = this.time.addEvent({delay: 30000, callback: () => {this.speed_up = true}, loop: false})
         this.text = this.add.text(borderUISize + 450, borderUISize + borderPadding * 2, '', scoreConfig);
@@ -74,10 +74,6 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
         }
         this.fireCenter = this.add.text(borderPadding + 350, borderUISize + borderPadding * 2, 'fire',fireConfig)
-        /*this.add.timeline([{
-            at: 2000,
-            run(){console.log('30 seconds left')}
-        }])*/ 
         //game over flag
         this.gameOver = false 
         //60 seconds play clock 
@@ -123,10 +119,10 @@ class Play extends Phaser.Scene{
             this.fireUpdate(this.p1Rocket)
             //speed up the ship and then stop the increment otherwise it just disappears 
             if(this.speed_up == true){
-                this.speedupdate(this.ship01)
-                this.speedupdate(this.ship02)
-                this.speedupdate(this.ship03)
-                this.speedupdate(this.turnip_ship)
+                this.ship01.speedUp()
+                this.ship02.speedUp()
+                this.ship03.speedUp()
+                this.turnip_ship.speedUp()
                 this.speed_up = false;
             }
         }
@@ -162,9 +158,6 @@ class Play extends Phaser.Scene{
         this.scoreLeft.text = this.p1Score
         //have a random number generator here with console.log that goes from 0 to 3. 
         let rand_num = Math.floor(Math.random() * 4)
-        //remove this later  
-        //console.log("the rand num is " + rand_num);
-        //random explosion stuff
         if(rand_num == 0){
             this.sound.play('wipe-explosion')
         }

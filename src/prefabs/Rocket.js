@@ -28,9 +28,6 @@ class Rocket extends Phaser.GameObjects.Sprite{
                 }
             }
         }
-        console.log(this.x)
-        //console.log(pointerCLICK.worldX)
-        //console.log(pointerCLICK.distance)
         //fire button with both keyboard input and mouse input
         if((Phaser.Input.Keyboard.JustDown(keyFIRE) || pointerCLICK.leftButtonDown()) && !this.isFiring){
             this.isFiring = true
