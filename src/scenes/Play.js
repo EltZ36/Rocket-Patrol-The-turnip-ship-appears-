@@ -21,12 +21,12 @@ class Play extends Phaser.Scene{
         keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+        pointerCLICK = this.input.activePointer;
         //adding the three spaceships 
-        
         this.ship01 = new SpaceShip(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0,0)
         this.ship02 = new SpaceShip(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0,0)
         this.ship03 = new SpaceShip(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0,0)
-    
+        //changing positions if their directions change
         if(this.ship01.getRandom() == 1){
             this.ship01.setX(-100)
         }
@@ -36,11 +36,6 @@ class Play extends Phaser.Scene{
         if(this.ship03.getRandom() == 1){
             this.ship03.setX(-370)
         }
-        //this.ship02.x = 
-        //this.ship02.x = 
-        //this.ship01 = new SpaceShip(this, -100, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0,0)
-        //this.ship02 = new SpaceShip(this, -200, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0,0)
-        //this.ship03 = new SpaceShip(this, -300, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0,0)
         //the fastest ship 
         this.turnip_ship = new TurnipShip(this, game.config.width, borderUISize * 8 + borderPadding * 5, 'turnipship',0,50).setOrigin(0,0)
         //score

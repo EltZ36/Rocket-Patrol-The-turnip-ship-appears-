@@ -4,8 +4,7 @@ class SpaceShip extends Phaser.GameObjects.Sprite{
         scene.add.existing(this)
         this.points = pointValue
         this.moveSpeed = game.settings.spaceshipSpeed 
-        //this.ship_random = Math.floor(Math.random() * 2)
-        this.ship_random = 1
+        this.ship_random = Math.floor(Math.random() * 2)
     }
 
     update() {
@@ -34,6 +33,7 @@ class SpaceShip extends Phaser.GameObjects.Sprite{
         }
     }
 
+    //get the random value of the ship and follow the black box implementation of classes
     getRandom(){
         return this.ship_random 
     }

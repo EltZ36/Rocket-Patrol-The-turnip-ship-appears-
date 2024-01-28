@@ -8,8 +8,8 @@ class Rocket extends Phaser.GameObjects.Sprite{
     }
 
     update(){
-        //mouse movement is gotten from https://labs.phaser.io/edit.html?src=src/input/mouse/right%20mouse%20button.js&v=3.70.0
-        
+        // for the mouse input and left click: https://labs.phaser.io/edit.html?src=src/game%20objects/graphics/mouse%20trail.js&v=3.70.0
+        // and https://labs.phaser.io/view.html?src=src/input\pointer\pointer%20buttons.js
         //left/right movement
         if(!this.isFiring){
             if(keyLEFT.isDown && this.x >= borderUISize + this.width){
@@ -18,9 +18,21 @@ class Rocket extends Phaser.GameObjects.Sprite{
             else if(keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width){
                 this.x += this.moveSpeed
             }
+            else if(pointerCLICK.distance != 0){
+                this.x = pointerCLICK.worldX
+                if(this.x > 594){
+                    this.x = 594
+                }
+                else if(this.x < 46){
+                    this.x = 46
+                }
+            }
         }
-        //fire button 
-        if(Phaser.Input.Keyboard.JustDown(keyFIRE) && !this.isFiring){
+        console.log(this.x)
+        //console.log(pointerCLICK.worldX)
+        //console.log(pointerCLICK.distance)
+        //fire button with both keyboard input and mouse input
+        if((Phaser.Input.Keyboard.JustDown(keyFIRE) || pointerCLICK.leftButtonDown()) && !this.isFiring){
             this.isFiring = true
             this.sfxShot.play() 
         }
