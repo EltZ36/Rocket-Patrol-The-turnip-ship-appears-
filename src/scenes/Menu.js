@@ -6,7 +6,7 @@ Rocket Patrol: The turnip ship appears!
 
 Mods: 
 Implement the 'FIRE' UI text from the original game (1)
-Implement the speed increase that happens after 30 seconds in the original game (1)
+Implement the speed increase that happens after 30 seconds in the original game (1) <- speedup occurs 30 seconds after easy mode and 30 seconds after expert mode so 15 seconds as a result. 
 Randomize each spaceship's movement direction at the start of each play (1) <- The positions of the ships change as a result of this randomized movement otherwise the ships move together which is not the goal of this game
 Create a new scrolling tile sprite for the background (1) <- for this, the tile sprite has more stars and the stars are no longer just dots and have more squares around them 
 Create 4 new explosion sound effects and randomize which one plays on impact (3)
